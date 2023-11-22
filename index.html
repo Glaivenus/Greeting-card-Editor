@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.4/fabric.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" /> -->
+
+
+
+    <style>
+        #pic1 {
+            border: 1px solid black;
+        }
+
+        body {
+            /* background: linear-gradient(to right, #ff934c, #fc686f); */
+            background: rgb(255, 255, 255);
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        #textColor {
+            margin-left: 10px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            background-color:#66a3d8;
+            color: #ffffff;
+            border:solid 1px white;
+        }
+        
+        .popup textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .popup button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #337ab7;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #thumbnailContainer {
+            display: flex;
+            flex-wrap: wrap;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .thumbnail {
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.3s;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .thumbnail:hover {
+            border: 2px solid rgb(52, 52, 109);
+        }
+
+        .toolbox {
+            position: fixed;
+            height: 50px;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            display: flex;
+            background: #000;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="canvas-container">
+    <div class="toolbox">
+        <input type="color" id="textColor" value="#000" style="margin-right: 5%; height: 100%;">
+        <textarea id="textArea" placeholder="Text here..." style="width: 30%;" ></textarea>
+        <button id="addTextBtn" onclick="addTextToCanvas()" style="margin-right: 5%;">Add Text</button>
+        <button id="deleteBtn" onclick="deleteSelectedText()">Delete Selected Text</button>
+        <button id="modifyBtn" onclick="openModifyPopup()">Modify Selected Text</button>
+        <button id="changeBackgroundBtn" onclick="showBackgroundPopup()">Change Background</button>
+        <button id="downloadBtn" style="background-color: rgb(173, 46, 46);color: white; margin-left: 5%;">Download</button>
+    </div>
+    <canvas id="pic1" style="width: 21.6cm; height: 30.3cm; margin-top: 55px; ;"></ca   nvas>
+</div>
+
+
+
+<div id="modifyPopup" class="popup">
+    <textarea id="modifyTextArea"></textarea>
+    <input type="color" id="modifyTextColor" value="#000000">
+    <button onclick="modifySelectedText()">Save Changes</button>
+</div>
+
+<div id="backgroundPopup" class="popup">
+    <div id="thumbnailContainer"></div>
+    <button onclick="closeBackgroundPopup()">Cancel</button>
+</div>
+
+<script>
+    var canvas = new fabric.Canvas('pic1');
+    canvas.setHeight(1090.8);
+    canvas.setWidth(777.6);
+
+
+    var backgrounds = ["img/1.png", "img/2.png", "img/3.png"];
+    var currentBackground = 0;
+    var thumbnailsPerPage = 4;
+    var currentPage = 0;
+
+    updateBackgroundThumbnails();
+
+    function updateBackgroundThumbnails() {
+        var thumbnailContainer = document.getElementById('thumbnailContainer');
+        thumbnailContainer.innerHTML = "";
+
+        var startIndex = currentPage * thumbnailsPerPage;
+        var endIndex = startIndex + thumbnailsPerPage;
+
+        for (var i = startIndex; i < endIndex && i < backgrounds.length; i++) {
+            var thumbnail = document.createElement('div');
+            thumbnail.className = 'thumbnail';
+            var img = document.createElement('img');
+            img.src = backgrounds[i];
+            thumbnail.appendChild(img);
+            thumbnail.addEventListener('click', changeBackground.bind(null, i));
+            thumbnailContainer.appendChild(thumbnail);
+        }
+
+    }
+
+
+
+    function changePage(offset) {
+        currentPage += offset;
+        updateBackgroundThumbnails();
+    }
+
+    function addTextToCanvas() {  
+        var text = document.getElementById('textArea').value;
+        if (text.trim() !== "") {
+            var textColor = document.getElementById('textColor').value;
+
+            var fabricText = new fabric.IText(text, {
+                left: canvas.width / 2,
+                top: canvas.height / 2,
+                fontSize: 20,
+                fill: textColor, 
+                selectable: true
+            });
+            canvas.add(fabricText);
+            canvas.bringToFront(fabricText);
+        }
+    }
+
+    function deleteSelectedText() {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'i-text') {
+            canvas.remove(activeObject);   
+        }
+    }
+
+    function openModifyPopup() {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'i-text') {
+            var modifyTextArea = document.getElementById('modifyTextArea');
+            var modifyTextColor = document.getElementById('modifyTextColor');
+
+            modifyTextArea.value = activeObject.text;
+            modifyTextColor.value = activeObject.fill;
+
+            document.getElementById('modifyPopup').style.display = 'block';
+        }
+    }
+
+    function modifySelectedText() {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'i-text') {
+            var newText = document.getElementById('modifyTextArea').value;
+            var newTextColor = document.getElementById('modifyTextColor').value;
+
+            activeObject.set({
+                text: newText,
+                fill: newTextColor
+            });
+
+            canvas.renderAll();
+            document.getElementById('modifyPopup').style.display = 'none';
+        }
+    }
+
+    function showBackgroundPopup() {
+        document.getElementById('backgroundPopup').style.display = 'block';
+    }
+
+    function closeBackgroundPopup() {
+        document.getElementById('backgroundPopup').style.display = 'none';
+    }
+
+    function changeBackground(index) {
+        currentBackground = index;
+        updateBackground();
+        closeBackgroundPopup();
+    }
+
+    function closeBackgroundPopup() {
+    document.getElementById('backgroundPopup').style.display = 'none';
+    }
+
+    function updateBackground() {
+        var selectedBackground = backgrounds[currentBackground];
+
+        fabric.Image.fromURL(selectedBackground, function (img) {
+            var scaleX = canvas.width / img.width;
+            var scaleY = canvas.height / img.height;
+            var scale = Math.max(scaleX, scaleY);
+
+            img.set({
+                scaleX: scale,
+                scaleY: scale,
+                left: 0,
+                top: 0,
+                selectable: false
+            });
+
+            canvas.clear();
+            canvas.add(img);
+            canvas.renderAll();
+        });
+    }
+
+    document.getElementById('downloadBtn').addEventListener('click', downloadCanvas, false);
+
+    function downloadCanvas() {
+        var link = document.createElement('a');
+        link.href = canvas.toDataURL({
+            format: 'png',
+            quality: 0.8
+        });
+        link.download = 'canvas.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+
+
+
+
+</script>
+
+</body>
+</html>
