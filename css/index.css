@@ -1,0 +1,85 @@
+#pic1 {
+    border: 1px solid black;
+}
+
+body {
+    /* background: linear-gradient(to right, #ff934c, #fc686f); */
+    background: rgb(255, 255, 255);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+#textColor {
+    margin-left: 10px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+button {
+    background-color:#66a3d8;
+    color: #ffffff;
+    border:solid 1px white;
+}
+
+.popup textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.popup button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #337ab7;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+#thumbnailContainer {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.thumbnail {
+    margin: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.thumbnail:hover {
+    border: 2px solid rgb(52, 52, 109);
+}
+
+.toolbox {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    background: #000;
+}
