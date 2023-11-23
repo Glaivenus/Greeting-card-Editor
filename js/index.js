@@ -3,22 +3,26 @@ function changePage(offset) {
     updateBackgroundThumbnails();
 }
 
-function addTextToCanvas() {  
+function addTextToCanvas() {
     var text = document.getElementById('textArea').value;
-    if (text.trim() !== "") {
-        var textColor = document.getElementById('textColor').value;
-
-        var fabricText = new fabric.IText(text, {
-            left: canvas.width / 2,
-            top: canvas.height / 2,
-            fontSize: 20,
-            fill: textColor, 
-            selectable: true
-        });
-        canvas.add(fabricText);
-        canvas.bringToFront(fabricText);
+    if (!text.trim()) {
+        text = defaultText;  // Use default text
     }
+
+    var textColor = document.getElementById('textColor').value;
+
+    var fabricText = new fabric.IText(text, {
+        left: canvas.height / 12,
+        top: canvas.height / 2.5,
+        fontSize: 25,
+        fill: textColor,
+        selectable: true
+    });
+
+    canvas.add(fabricText);
+    canvas.bringToFront(fabricText);
 }
+
 
 function deleteSelectedText() {
     var activeObject = canvas.getActiveObject();
@@ -32,9 +36,11 @@ function openModifyPopup() {
     if (activeObject && activeObject.type === 'i-text') {
         var modifyTextArea = document.getElementById('modifyTextArea');
         var modifyTextColor = document.getElementById('modifyTextColor');
+        var modifyFontFamily = document.getElementById('modifyFontFamily');
 
         modifyTextArea.value = activeObject.text;
         modifyTextColor.value = activeObject.fill;
+        modifyFontFamily.value = activeObject.fontFamily;
 
         document.getElementById('modifyPopup').style.display = 'block';
     }
@@ -45,10 +51,12 @@ function modifySelectedText() {
     if (activeObject && activeObject.type === 'i-text') {
         var newText = document.getElementById('modifyTextArea').value;
         var newTextColor = document.getElementById('modifyTextColor').value;
+        var newFontFamily = document.getElementById('modifyFontFamily').value;
 
         activeObject.set({
             text: newText,
-            fill: newTextColor
+            fill: newTextColor,
+            fontFamily: newFontFamily
         });
 
         canvas.renderAll();
@@ -92,9 +100,16 @@ function updateBackground() {
 
         canvas.clear();
         canvas.add(img);
+
+        // Default Text & Logo
+        addTextToCanvas();
+        addLogoToCanvas();
+
         canvas.renderAll();
     });
 }
+
+
 
 document.getElementById('downloadBtn').addEventListener('click', downloadCanvas, false);
 

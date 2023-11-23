@@ -5,6 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="./js/index.js"></script>
+    <script src="./js/addlogo.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" /> -->
@@ -22,6 +23,11 @@
         <button id="deleteBtn" onclick="deleteSelectedText()">Delete Selected Text</button>
         <button id="modifyBtn" onclick="openModifyPopup()">Modify Selected Text</button>
         <button id="changeBackgroundBtn" onclick="showBackgroundPopup()">Change Background</button>
+
+        
+        <button id="addLogoBtn" onclick="addLogoToCanvas()">Add Logo</button>
+
+        
         <button id="downloadBtn" style="background-color: rgb(173, 46, 46);color: white; margin-left: 5%;">Download</button>
     </div>
     <canvas id="pic1" style="width: 21.6cm; height: 30.3cm; margin-top: 55px; ;"></ca   nvas>
@@ -32,6 +38,16 @@
 <div id="modifyPopup" class="popup">
     <textarea id="modifyTextArea"></textarea>
     <input type="color" id="modifyTextColor" value="#000000">
+
+
+    <!-- font select -->
+    <select id="modifyFontFamily">
+        <option value="Arial">Arial</option>
+        <option value="Helvetica">Helvetica</option>
+        <option value="Times New Roman">Times New Roman</option>
+    </select>
+
+
     <button onclick="modifySelectedText()">Save Changes</button>
 </div>
 
@@ -45,6 +61,7 @@
     canvas.setHeight(1090.8);
     canvas.setWidth(777.6);
 
+    var defaultText = "Dear \n\n\nWe would like to express our appreciation for your help and \nco-operation in the sale and conveyance of the property at\n\nHere’s to more fruitful collaborations in the future. \nThank you for choosing us as your trusted partner.\n\nWarmest regards,";
 
     var backgrounds = ["img/1.png", "img/2.png", "img/3.png"];
     var currentBackground = 0;
@@ -71,6 +88,7 @@
         }
 
     }
+
 
 </script>
 
