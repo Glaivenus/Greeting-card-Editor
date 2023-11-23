@@ -12,8 +12,11 @@ Select background template
 
 
 Developing:
-1. Upload background
-2. Add watermarks
-3. Change fonts
-4. Add photos
-5. Change canvas size ...
+- [ ] Upload background
+- [x] Add logos
+- [ ] Upload logos
+- [x] Change fonts
+- [ ] More fonts
+- [ ] Add photos
+- [ ] Change canvas size
+      ...
