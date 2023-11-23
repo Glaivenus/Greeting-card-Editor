@@ -24,12 +24,14 @@ function addTextToCanvas() {
 }
 
 
-function deleteSelectedText() {
+
+function deleteSelectedObject() {
     var activeObject = canvas.getActiveObject();
-    if (activeObject && activeObject.type === 'i-text') {
-        canvas.remove(activeObject);   
+    if (activeObject) {
+        canvas.remove(activeObject);
     }
 }
+
 
 function openModifyPopup() {
     var activeObject = canvas.getActiveObject();
