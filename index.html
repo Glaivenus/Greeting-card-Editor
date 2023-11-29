@@ -9,6 +9,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" /> -->
+    <link href="./css/font.css" rel="stylesheet" type="text/css" />
     <link href="./css/index.css" rel="stylesheet" type="text/css" />
 
 
@@ -19,6 +20,15 @@
     <div class="toolbox">
         <input type="color" id="textColor" value="#000" style="margin-right: 5%; height: 100%;">
         <textarea id="textArea" placeholder="Text here..." style="width: 30%;" ></textarea>
+
+        <select id="fontSelector">
+            <option value="Arial">Arial</option>
+            <option value="Ephesis">Ephesis</option>
+            <option value="MaShanZheng">MaShanZheng</option>
+            <option value="Times New Roman">Times New Roman</option>
+        </select>
+
+        
         <button id="addTextBtn" onclick="addTextToCanvas()" style="margin-right: 5%;">Add Text</button>
         
         <button id="deleteBtn" onclick="deleteSelectedObject()">Delete</button>
@@ -40,12 +50,10 @@
 <div id="modifyPopup" class="popup">
     <textarea id="modifyTextArea"></textarea>
     <input type="color" id="modifyTextColor" value="#000000">
-
-
-    <!-- font select -->
-    <select id="modifyFontFamily">
+    <select id="modifyFontSelector">
         <option value="Arial">Arial</option>
-        <option value="Helvetica">Helvetica</option>
+        <option value="Ephesis">Ephesis</option>
+        <option value="MaShanZheng">MaShanZheng</option>
         <option value="Times New Roman">Times New Roman</option>
     </select>
 

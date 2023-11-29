@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Ma Shan Zheng';
+    src: url('../fonts/MaShanZheng-Regular.ttf') format('truetype');
+   
+}
+
 #pic1 {
     border: 1px solid black;
 }

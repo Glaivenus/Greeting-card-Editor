@@ -5,23 +5,22 @@ function changePage(offset) {
 
 function addTextToCanvas() {
     var text = document.getElementById('textArea').value;
-    if (!text.trim()) {
-        text = defaultText;  // Use default text
+    if (text.trim() !== "") {
+        var textColor = document.getElementById('textColor').value;
+        var selectedFont = document.getElementById('fontSelector').value; 
+        var fabricText = new fabric.IText(text, {
+            left: canvas.width / 2,
+            top: canvas.height / 2,
+            fontSize: 20,
+            fill: textColor,
+            fontFamily: selectedFont,
+            selectable: true
+        });
+        canvas.add(fabricText);
+        canvas.bringToFront(fabricText);
     }
-
-    var textColor = document.getElementById('textColor').value;
-
-    var fabricText = new fabric.IText(text, {
-        left: canvas.height / 12,
-        top: canvas.height / 2.5,
-        fontSize: 25,
-        fill: textColor,
-        selectable: true
-    });
-
-    canvas.add(fabricText);
-    canvas.bringToFront(fabricText);
 }
+
 
 
 
@@ -37,28 +36,26 @@ function openModifyPopup() {
     var activeObject = canvas.getActiveObject();
     if (activeObject && activeObject.type === 'i-text') {
         var modifyTextArea = document.getElementById('modifyTextArea');
-        var modifyTextColor = document.getElementById('modifyTextColor');
-        var modifyFontFamily = document.getElementById('modifyFontFamily');
+        var modifyFontSelector = document.getElementById('modifyFontSelector');
 
         modifyTextArea.value = activeObject.text;
-        modifyTextColor.value = activeObject.fill;
-        modifyFontFamily.value = activeObject.fontFamily;
-
+        modifyFontSelector.value = activeObject.fontFamily || 'Arial'; 
         document.getElementById('modifyPopup').style.display = 'block';
     }
 }
+
 
 function modifySelectedText() {
     var activeObject = canvas.getActiveObject();
     if (activeObject && activeObject.type === 'i-text') {
         var newText = document.getElementById('modifyTextArea').value;
         var newTextColor = document.getElementById('modifyTextColor').value;
-        var newFontFamily = document.getElementById('modifyFontFamily').value;
+        var newFont = document.getElementById('modifyFontSelector').value;
 
         activeObject.set({
             text: newText,
             fill: newTextColor,
-            fontFamily: newFontFamily
+            fontFamily: newFont
         });
 
         canvas.renderAll();
