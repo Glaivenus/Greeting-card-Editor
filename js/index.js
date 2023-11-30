@@ -5,15 +5,16 @@ function changePage(offset) {
 
 function addTextToCanvas() {
     var text = document.getElementById('textArea').value;
+    var textColor = document.getElementById('textColor').value;
+    var selectedFont = document.getElementById('fontSelector').value;
+
     if (text.trim() !== "") {
-        var textColor = document.getElementById('textColor').value;
-        var selectedFont = document.getElementById('fontSelector').value; 
         var fabricText = new fabric.IText(text, {
-            left: canvas.width / 2,
-            top: canvas.height / 2,
+            left: canvas.width / 5.8,
+            top: canvas.height / 2.6,
             fontSize: 20,
             fill: textColor,
-            fontFamily: selectedFont,
+            fontFamily: selectedFont, 
             selectable: true
         });
         canvas.add(fabricText);
@@ -58,6 +59,10 @@ function modifySelectedText() {
             fontFamily: newFont
         });
 
+        //Redrawing Text 
+        activeObject.set("text", activeObject.text + " "); 
+        activeObject.set("text", activeObject.text.trim()); 
+
         canvas.renderAll();
         document.getElementById('modifyPopup').style.display = 'none';
     }
@@ -73,9 +78,32 @@ function closeBackgroundPopup() {
 
 function changeBackground(index) {
     currentBackground = index;
+    canvas.clear();
     updateBackground();
+
+    addDefaultText();
+
     closeBackgroundPopup();
 }
+
+// Default Text
+function addDefaultText() {
+    var textColor = '#000000'; 
+    var selectedFont = 'Arial'; 
+    var fabricText = new fabric.IText(defaultText, {
+        left: canvas.width / 5.8,
+        top: canvas.height / 2.6,
+        fontSize: 20,
+        fill: textColor,
+        fontFamily: selectedFont, 
+        selectable: true
+    });
+
+    canvas.add(fabricText);
+    canvas.bringToFront(fabricText);
+}
+
+
 
 function closeBackgroundPopup() {
 document.getElementById('backgroundPopup').style.display = 'none';
@@ -83,12 +111,10 @@ document.getElementById('backgroundPopup').style.display = 'none';
 
 function updateBackground() {
     var selectedBackground = backgrounds[currentBackground];
-
     fabric.Image.fromURL(selectedBackground, function (img) {
         var scaleX = canvas.width / img.width;
         var scaleY = canvas.height / img.height;
         var scale = Math.max(scaleX, scaleY);
-
         img.set({
             scaleX: scale,
             scaleY: scale,
@@ -96,18 +122,16 @@ function updateBackground() {
             top: 0,
             selectable: false
         });
-
         canvas.clear();
-        canvas.add(img);
-
-        // Default Text & Logo
-        addTextToCanvas();
-        addLogoToCanvas();
+        canvas.add(img); 
+        canvas.sendToBack(img); 
+        
+        addDefaultText(); 
+        addLogoToCanvas()
 
         canvas.renderAll();
     });
 }
-
 
 
 document.getElementById('downloadBtn').addEventListener('click', downloadCanvas, false);

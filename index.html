@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.4/fabric.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fabric"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
     <script src="./js/index.js"></script>
     <script src="./js/addlogo.js"></script>
 
@@ -51,7 +53,7 @@
     <textarea id="modifyTextArea"></textarea>
     <input type="color" id="modifyTextColor" value="#000000">
     <select id="modifyFontSelector">
-        <option value="Arial">Arial</option>
+        <option value="Arial">Arial</option>     
         <option value="Ephesis">Ephesis</option>
         <option value="MaShanZheng">MaShanZheng</option>
         <option value="Times New Roman">Times New Roman</option>
@@ -72,6 +74,7 @@
     canvas.setWidth(777.6);
 
     var defaultText = "Dear \n\n\nWe would like to express our appreciation for your help and \nco-operation in the sale and conveyance of the property at\n\nHere’s to more fruitful collaborations in the future. \nThank you for choosing us as your trusted partner.\n\nWarmest regards,";
+    var isDefaultTextAdded = false;
 
     var backgrounds = ["img/1.png", "img/2.png", "img/3.png"];
     var currentBackground = 0;
