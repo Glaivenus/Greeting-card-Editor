@@ -14,3 +14,4 @@ function addLogoToCanvas() {
         canvas.bringToFront(img);
     });
 }
+

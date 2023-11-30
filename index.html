@@ -15,7 +15,7 @@
     <link href="./css/index.css" rel="stylesheet" type="text/css" />
 
 
-</head>
+</head>  
 <body>
 
 <div class="canvas-container">
@@ -40,7 +40,9 @@
 
         
         <button id="addLogoBtn" onclick="addLogoToCanvas()">Add Logo</button>
-
+        
+        <input type="file" id="uploadImage" hidden />
+        <button onclick="document.getElementById('uploadImage').click();">Upload Image</button>
         
         <button id="downloadBtn" style="background-color: rgb(173, 46, 46);color: white; margin-left: 5%;">Download</button>
     </div>

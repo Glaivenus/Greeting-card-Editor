@@ -134,6 +134,38 @@ function updateBackground() {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('uploadImage').addEventListener('change', function (e) {
+        if (e.target.files && e.target.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (event) {
+                var imgObj = new Image();
+                imgObj.src = event.target.result;
+    
+                imgObj.onload = function () {
+    
+                    var fabricImage = new fabric.Image(imgObj, {
+                        left: 50,
+                        top: 50,
+                        angle: 0,
+                        scaleX: 0.5,
+                        scaleY: 0.5
+                    });
+                    canvas.add(fabricImage); 
+                    canvas.renderAll();
+                    canvas.bringToFront(fabricImage);
+                };
+            };
+    
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+});
+
+
+
+
 document.getElementById('downloadBtn').addEventListener('click', downloadCanvas, false);
 
 function downloadCanvas() {
