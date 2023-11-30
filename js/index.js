@@ -166,16 +166,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-document.getElementById('downloadBtn').addEventListener('click', downloadCanvas, false);
 
-function downloadCanvas() {
-    var link = document.createElement('a');
-    link.href = canvas.toDataURL({
-        format: 'png',
-        quality: 0.8
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+        var canvasURL = canvas.toDataURL('image/png'); 
+        var link = document.createElement('a'); 
+        link.download = 'canvas.png';
+        link.href = canvasURL; 
+        link.click();
     });
-    link.download = 'canvas.png';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
+});
