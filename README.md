@@ -16,7 +16,7 @@ Developing:
 - [x] Add logos
 - [ ] Upload logos
 - [x] Change fonts
-- [ ] More fonts
+- [x] More fonts
 - [ ] Add photos
 - [ ] Change canvas size
       ...
