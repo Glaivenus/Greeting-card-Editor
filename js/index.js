@@ -10,8 +10,8 @@ function addTextToCanvas() {
 
     if (text.trim() !== "") {
         var fabricText = new fabric.IText(text, {
-            left: canvas.width / 5.8,
-            top: canvas.height / 2.6,
+            left: canvas.width / 2,
+            top: canvas.height / 2.5,
             fontSize: 20,
             fill: textColor,
             fontFamily: selectedFont, 
@@ -86,6 +86,45 @@ function changeBackground(index) {
     closeBackgroundPopup();
 }
 
+
+// Bg upload
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('uploadBackgroundImage').addEventListener('change', function (e) {
+        if (e.target.files && e.target.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (event) {
+                fabric.Image.fromURL(event.target.result, function (img) {
+                    var imgRatio = img.width / img.height;
+                    var canvasRatio = canvas.width / canvas.height;
+                    var scale = canvasRatio >= imgRatio ? canvas.height / img.height : canvas.width / img.width;
+
+                    img.set({
+                        originX: 'left',
+                        originY: 'top',
+                        scaleX: scale,
+                        scaleY: scale
+                    });
+
+                    
+                    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                });
+            };
+
+            reader.readAsDataURL(e.target.files[0]); 
+        }
+        canvas.clear();
+        addDefaultText();
+        addLogoToCanvas();
+        canvas.renderAll;
+
+        setTimeout(function() {
+            e.target.value = '';
+        }, 100);
+    });
+});
+
+
 // Default Text
 function addDefaultText() {
     var textColor = '#000000'; 
@@ -127,7 +166,7 @@ function updateBackground() {
         canvas.sendToBack(img); 
         
         addDefaultText(); 
-        addLogoToCanvas()
+        addLogoToCanvas();
 
         canvas.renderAll();
     });
@@ -164,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
+ 
 
 
 document.addEventListener('DOMContentLoaded', function () {

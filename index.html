@@ -8,6 +8,7 @@
 
     <script src="./js/index.js"></script>
     <script src="./js/addlogo.js"></script>
+    <script src="./js/fontloader.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" /> -->
@@ -20,7 +21,7 @@
 
 <div class="canvas-container">
     <div class="toolbox">
-        <input type="color" id="textColor" value="#000" style="margin-right: 5%; height: 100%;">
+        <input type="color" id="textColor" value="#000000" style="margin-right: 5%; height: 100%;">
         <textarea id="textArea" placeholder="Text here..." style="width: 30%;" ></textarea>
 
         <select id="fontSelector">
@@ -35,7 +36,7 @@
         
         <button id="deleteBtn" onclick="deleteSelectedObject()">Delete</button>
 
-        <button id="modifyBtn" onclick="openModifyPopup()">Modify Selected Text</button>
+        <button id="modifyBtn" onclick="openModifyPopup()"   >Modify Selected Text</button>
         <button id="changeBackgroundBtn" onclick="showBackgroundPopup()">Change Background</button>
 
         
@@ -44,6 +45,11 @@
         <input type="file" id="uploadImage" hidden />
         <button onclick="document.getElementById('uploadImage').click();">Upload Image</button>
         
+
+        <input type="file" id="uploadBackgroundImage" hidden />
+        <button onclick="document.getElementById('uploadBackgroundImage').click();">Upload Background Image</button>
+
+
         <button id="downloadBtn" style="background-color: rgb(173, 46, 46);color: white; margin-left: 5%;">Download</button>
     </div>
     <canvas id="pic1" style="width: 21.6cm; height: 30.3cm; margin-top: 55px; ;"></ca   nvas>
@@ -82,6 +88,17 @@
     var currentBackground = 0;
     var thumbnailsPerPage = 4;
     var currentPage = 0;
+
+    function setDefaultBackground() {
+    var defaultBackgroundIndex = 0; 
+    changeBackground(defaultBackgroundIndex);
+    }
+
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     setDefaultBackground();
+    // });
+
 
     updateBackgroundThumbnails();
 
