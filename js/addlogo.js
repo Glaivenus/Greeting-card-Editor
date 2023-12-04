@@ -7,7 +7,7 @@ function addLogoToCanvas() {
             scaleX: 0.08, 
             scaleY: 0.08,
             left: 100, 
-            top: canvas.width / 4,
+            top: canvas.width / 8,
         });
 
         canvas.add(img);

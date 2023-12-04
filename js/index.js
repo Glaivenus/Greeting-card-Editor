@@ -130,9 +130,9 @@ function addDefaultText() {
     var textColor = '#000000'; 
     var selectedFont = 'Arial'; 
     var fabricText = new fabric.IText(defaultText, {
-        left: canvas.width / 5.8,
+        left: canvas.width / 7.3,
         top: canvas.height / 2.6,
-        fontSize: 20,
+        fontSize: 22,
         fill: textColor,
         fontFamily: selectedFont, 
         selectable: true
@@ -141,6 +141,24 @@ function addDefaultText() {
     canvas.add(fabricText);
     canvas.bringToFront(fabricText);
 }
+
+//thank you
+function addtkText() {
+    var textColor = '#E0111A'; 
+    var selectedFont = 'Ephesis'; 
+    var fabricText = new fabric.IText('Thank you!', {
+        left: canvas.width / 13,
+        top: canvas.height / 1.5,
+        fontSize: 170,
+        fill: textColor,
+        fontFamily: selectedFont, 
+        selectable: true
+    });
+
+    canvas.add(fabricText);
+    canvas.bringToFront(fabricText);
+}
+
 
 
 
@@ -166,6 +184,7 @@ function updateBackground() {
         canvas.sendToBack(img); 
         
         addDefaultText(); 
+        addtkText()
         addLogoToCanvas();
 
         canvas.renderAll();
