@@ -35,7 +35,7 @@ function deleteSelectedObject() {
 
 function openModifyPopup() {
     var activeObject = canvas.getActiveObject();
-    if (activeObject && activeObject.type === 'i-text') {
+    if (activeObject && activeObject.type === 'i-text' || activeObject.type === 'textbox') {
         var modifyTextArea = document.getElementById('modifyTextArea');
         var modifyFontSelector = document.getElementById('modifyFontSelector');
 
@@ -48,7 +48,7 @@ function openModifyPopup() {
 
 function modifySelectedText() {
     var activeObject = canvas.getActiveObject();
-    if (activeObject && activeObject.type === 'i-text') {
+    if (activeObject && activeObject.type === 'i-text' || activeObject.type === 'textbox') {
         var newText = document.getElementById('modifyTextArea').value;
         var newTextColor = document.getElementById('modifyTextColor').value;
         var newFont = document.getElementById('modifyFontSelector').value;
@@ -72,7 +72,7 @@ function showBackgroundPopup() {
     document.getElementById('backgroundPopup').style.display = 'block';
 }
 
-function closeBackgroundPopup() {
+function closeBackground  Popup() {
     document.getElementById('backgroundPopup').style.display = 'none';
 }
 
@@ -129,13 +129,16 @@ document.addEventListener('DOMContentLoaded', function () {
 function addDefaultText() {
     var textColor = '#000000'; 
     var selectedFont = 'Arial'; 
-    var fabricText = new fabric.IText(defaultText, {
+    var fabricText = new fabric.Textbox(defaultText, {
         left: canvas.width / 7.3,
         top: canvas.height / 2.6,
         fontSize: 22,
         fill: textColor,
         fontFamily: selectedFont, 
-        selectable: true
+        selectable: true,
+        wordWrap: true,
+        splitByGrapheme: true,
+        width: canvas.width * 0.8,
     });
 
     canvas.add(fabricText);
