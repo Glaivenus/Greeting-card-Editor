@@ -26,7 +26,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
+    width: 20vw;
     padding: 20px;
     background-color: #fff;
     border: 2px solid #000;
@@ -34,9 +34,11 @@ body {
 }
 
 button {
-    background-color:#66a3d8;
+    background-color: #e28d8d;
     color: #ffffff;
     border:solid 1px white;
+    margin:1vh;
+    
 }
 
 .popup textarea {
@@ -49,10 +51,11 @@ button {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #337ab7;
+    background-color: #f14646;
     color: #ffffff;
-    border: none;
+    border:solid 1px white;
     cursor: pointer;
+    border-radius: 1vh;
 }
 
 #thumbnailContainer {
@@ -81,11 +84,52 @@ button {
 
 .toolbox {
     position: fixed;
-    height: 50px;
+    height: 10vh;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 999;
     display: flex;
-    background: #000;
+    background: #e45959;
+}
+
+#addMenu {
+    border: 1px solid #ccc;
+    padding: 10px;
+    top: 5vw;
+    background-color: white;
+    position: absolute;
+    z-index: 1000;
+    /* 其他样式 */
+    display: flex;
+    flex-direction: column;
+}
+#mainMenuBtn, #changeBackgroundBtn, #modifyBtn, #deleteBtn, #downloadBtn {
+    /* padding: 1vh 1vh 1vw 1vw; */
+    font-size: 2vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;;
+    background-color: transparent;
+}
+
+#deleteBtn {
+    position: absolute;
+    right: 3vw;
+    text-align: center;
+}
+
+
+#downloadBtn {
+
+    width: 11vh;
+    height: 11vh;
+    font-size: 2vh;
+    border-radius: 50%;
+    position: fixed;
+    right: 3vw;
+    top: 85%;
+    
 }

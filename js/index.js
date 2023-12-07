@@ -3,6 +3,24 @@ function changePage(offset) {
     updateBackgroundThumbnails();
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('mainMenuBtn').addEventListener('click', function() {
+        var addMenu = document.getElementById('addMenu');
+        addMenu.style.display = addMenu.style.display === 'none' ? 'block' : 'none';
+    });
+
+
+
+// popup for add text
+
+document.getElementById('addTextBtn').addEventListener('click', function() {
+    document.getElementById('addTextPopup').style.display = 'block';
+});
+// function closeAddTextPopup() {
+//     document.getElementById('addTextPopup').style.display = 'none';
+// }
+});
+
 function addTextToCanvas() {
     var text = document.getElementById('textArea').value;
     var textColor = document.getElementById('textColor').value;
@@ -19,8 +37,19 @@ function addTextToCanvas() {
         });
         canvas.add(fabricText);
         canvas.bringToFront(fabricText);
+        document.getElementById('addTextPopup').style.display = 'none';
+        closeAddTextPopup();
     }
+
+    
 }
+
+
+function closeAddTextPopup() {
+    document.getElementById('addTextPopup').style.display = 'none';
+}
+
+
 
 
 
@@ -72,7 +101,7 @@ function showBackgroundPopup() {
     document.getElementById('backgroundPopup').style.display = 'block';
 }
 
-function closeBackground  Popup() {
+function closeBackgroundPopup() {
     document.getElementById('backgroundPopup').style.display = 'none';
 }
 
