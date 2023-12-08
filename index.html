@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <script src="https://cdn.jsdelivr.net/npm/fabric"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -16,6 +18,8 @@
     <link rel="stylesheet" href="./icons/iconfont.css">
 
     <link href="./css/index.css" rel="stylesheet" type="text/css" />
+    <!-- <link rel="stylesheet" href="./css/media.css" type="text/css" /> -->
+
 
 </head>  
 <body>
@@ -37,7 +41,7 @@
         </div>
 
         <!-- add text -->
-        <div id="addTextPopup" class="popup" style="display: none;">color:
+        <div id="addTextPopup" class="popup" style="display: none;">Color:
             <input type="color" id="textColor" value="#000000" style="height: 5vh; width: 10vh;">
             <textarea id="textArea" placeholder="Text here..." style="width: 90%;" ></textarea>
 
@@ -87,9 +91,10 @@
 </div>
 
 <!-- change BG -->
-<div id="backgroundPopup" class="popup">
-
+<div id="backgroundPopup" class="popup" style="color: white;">
+    Categories:
     <select id="backgroundCategory">
+        
         <option value="thank-you-card">Thank You Card</option>
         <!-- CATEGORIES -->
     </select>
@@ -98,10 +103,12 @@
     <div id="thumbnailContainer"></div>
 
     <input type="file" id="uploadBackgroundImage" hidden />
-    <button onclick="document.getElementById('uploadBackgroundImage').click();">Upload Background Image</button>    
+
+    <div class="buttonarea">
+    <button onclick="document.getElementById('uploadBackgroundImage').click();">Upload Background</button>    
 
     <button onclick="closeBackgroundPopup()">Cancel</button>
-
+    </div>
 
 </div>
 

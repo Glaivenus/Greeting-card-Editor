@@ -1,0 +1,63 @@
+@media screen and (min-width: 768px) {
+
+    #addMenu {
+        width: 40%; 
+        padding: 10px; 
+        border-radius: 0 0 0.5em 0.5em;
+        background-color: #1d1d1d;
+
+    }
+
+    #addMenu button {/* 增大字体大小 */
+        margin: 0;
+        display: block; 
+        box-shadow: 0.1em 0.1em rgba(112, 112, 112, 0.5);
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 19em;
+        height: 30em;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80vw;
+        padding: 20px;
+        background: #303030;
+        border: 2px solid #000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #thumbnailContainer {
+        height: 36%;
+        width: auto;
+    }
+
+    #modifyTextArea {
+        height: 30em;
+    }
+
+}
+
+
+@media screen and (min-width: 992px) {
+    #thumbnailContainer {
+        height: 80%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .buttonarea {
+        position: absolute;
+        /* bottom: 8em; */
+        display: flex;
+        
+    }
+    
+    .buttonarea button {
+        width: 7em;
+    }
+
+
+    
+}
