@@ -3,6 +3,7 @@ function changePage(offset) {
     updateBackgroundThumbnails();
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('mainMenuBtn').addEventListener('click', function() {
         var addMenu = document.getElementById('addMenu');
@@ -19,7 +20,7 @@ document.getElementById('addTextBtn').addEventListener('click', function() {
 // function closeAddTextPopup() {
 //     document.getElementById('addTextPopup').style.display = 'none';
 // }
-});
+});  
 
 function addTextToCanvas() {
     var text = document.getElementById('textArea').value;
@@ -145,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.clear();
         addDefaultText();
         addLogoToCanvas();
+        closeBackgroundPopup();
         canvas.renderAll;
 
         setTimeout(function() {
@@ -198,30 +200,35 @@ function closeBackgroundPopup() {
 document.getElementById('backgroundPopup').style.display = 'none';
 }
 
-function updateBackground() {
-    var selectedBackground = backgrounds[currentBackground];
-    fabric.Image.fromURL(selectedBackground, function (img) {
-        var scaleX = canvas.width / img.width;
-        var scaleY = canvas.height / img.height;
-        var scale = Math.max(scaleX, scaleY);
-        img.set({
-            scaleX: scale,
-            scaleY: scale,
-            left: 0,
-            top: 0,
-            selectable: false
-        });
-        canvas.clear();
-        canvas.add(img); 
-        canvas.sendToBack(img); 
-        
-        addDefaultText(); 
-        addtkText()
-        addLogoToCanvas();
+// change bg
 
+
+function updateBackground(imageUrl) {  
+    fabric.Image.fromURL(imageUrl, function (img) {
+        // check img
+        if (!img) {
+            console.error('Failed to load image: ' + imageUrl);
+            return;
+        }
+
+        var scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+        img.set({
+            originX: 'left',
+            originY: 'top',
+            scaleX: scale,
+            scaleY: scale
+        });
+
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+            originX: 'left',
+            originY: 'top',
+            scaleX: scale,
+            scaleY: scale
+        });
         canvas.renderAll();
     });
 }
+
 
 
 document.addEventListener('DOMContentLoaded', function () {

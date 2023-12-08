@@ -49,7 +49,7 @@
             </select>
 
             
-            <button id="addTextBtn" onclick="addTextToCanvas()" style="margin-right: 5%;">Add Text</button>
+            <button id="" onclick="addTextToCanvas()" style="margin-right: 5%;">Add Text</button>
             <button onclick="closeAddTextPopup()">Cancel</button>
         
         </div>
@@ -88,6 +88,13 @@
 
 <!-- change BG -->
 <div id="backgroundPopup" class="popup">
+
+    <select id="backgroundCategory">
+        <option value="thank-you-card">Thank You Card</option>
+        <!-- CATEGORIES -->
+    </select>
+
+
     <div id="thumbnailContainer"></div>
 
     <input type="file" id="uploadBackgroundImage" hidden />
@@ -98,6 +105,7 @@
 
 </div>
 
+<script src="./js/bg.js"></script>
 <script>
     var canvas = new fabric.Canvas('pic1');
     canvas.setHeight(1090.8);
@@ -106,7 +114,13 @@
     var defaultText = "Dear \n\n\nWe would like to express our appreciation for your help and \nco-operation in the sale and conveyance of the property at\n\nHere’s to more fruitful collaborations in the future. \nThank you for choosing us as your trusted partner.\n\nWarmest regards,";
     var isDefaultTextAdded = false;
 
-    var backgrounds = ["img/1.png", "img/2.png", "img/3.png"];
+    var backgrounds = [
+    { category: "thank-you-card", imageUrl: "img/1.png" },
+    { category: "thank-you-card", imageUrl: "img/2.png" },
+    { category: "thank-you-card", imageUrl: "img/3.png" }
+    // edit more here
+];
+
     var currentBackground = 0;
     var thumbnailsPerPage = 4;
     var currentPage = 0;
@@ -124,26 +138,66 @@
 
     updateBackgroundThumbnails();
 
-    function updateBackgroundThumbnails() {
+    document.getElementById('backgroundCategory').addEventListener('change', function() {
+    updateBackgroundThumbnails(this.value);
+    });
+
+
+    function updateBackgroundThumbnails(category) {
         var thumbnailContainer = document.getElementById('thumbnailContainer');
         thumbnailContainer.innerHTML = "";
 
-        var startIndex = currentPage * thumbnailsPerPage;
-        var endIndex = startIndex + thumbnailsPerPage;
+    var filteredBackgrounds = backgrounds.filter(function(bg) {
+        return bg.category === category;
+    });
 
-        for (var i = startIndex; i < endIndex && i < backgrounds.length; i++) {
-            var thumbnail = document.createElement('div');
-            thumbnail.className = 'thumbnail';
-            var img = document.createElement('img');
-            img.src = backgrounds[i];
-            thumbnail.appendChild(img);
-            thumbnail.addEventListener('click', changeBackground.bind(null, i));
-            thumbnailContainer.appendChild(thumbnail);
-        }
+    backgrounds.forEach(function(bg) {
+    var thumbnail = createThumbnail(bg.imageUrl);
 
-    }
+    //     //closure 闭包 unsolved
+    //     (function(bg) {
+    //     thumbnail.addEventListener('click', function() {
+    //         updateBackground(bg.imageUrl);
+    //     });
+    // })(bg);
 
 
+        thumbnail.addEventListener('click', function () {
+            updateBackground(bg.imageUrl);
+        });
+        thumbnailContainer.appendChild(thumbnail);
+    });
+}
+
+function createThumbnail(imageUrl) {
+    var thumbnail = document.createElement('div');
+    thumbnail.className = 'thumbnail';
+    var img = document.createElement('img');
+    img.src = imageUrl;
+    thumbnail.appendChild(img);
+
+    thumbnail.addEventListener('click', function() {
+        updateBackground(imageUrl);
+    });
+
+    return thumbnail;
+}
+
+
+
+
+
+
+function showBackgroundPopup() {
+    document.getElementById('backgroundPopup').style.display = 'block';
+    updateBackgroundThumbnails('thank-you-card'); // default category
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    addDefaultText();
+    addtkText();
+    addLogoToCanvas();
+});
 </script>
 
 </body>
