@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./icons/iconfont.css">
 
     <link href="./css/index.css" rel="stylesheet" type="text/css" />
-    <!-- <link rel="stylesheet" href="./css/media.css" type="text/css" /> -->
+    <link rel="stylesheet" href="./css/media.css" type="text/css" />
 
 
 </head>  
@@ -71,7 +71,7 @@
 
     <button id="downloadBtn" style="background-color: rgb(173, 46, 46);color: white; margin-left: 5%;"><span class="iconfont icon-xiazaidaoru"></span>Download</button>
 
-    <canvas id="pic1" style="width: 21.6cm; height: 30.3cm; margin-top: 10.5vh; "></canvas>
+    <canvas id="pic1" ></canvas>
 </div>
 
 
@@ -113,6 +113,7 @@
 </div>
 
 <script src="./js/bg.js"></script>
+<script src="./js/touch.js"></script>
 <script>
     var canvas = new fabric.Canvas('pic1');
     canvas.setHeight(1090.8);
@@ -205,7 +206,10 @@ document.addEventListener('DOMContentLoaded', function () {
     addtkText();
     addLogoToCanvas();
 });
+
+
 </script>
+<script src="./js/changesize.js"></script>
 
 </body>
 </html>

@@ -138,6 +138,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     
                     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                    scaleCanvasObjects(scale); // Adjust elements
+                    canvas.renderAll();
                 });
             };
 
@@ -146,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.clear();
         addDefaultText();
         addLogoToCanvas();
+        addtkText();
         closeBackgroundPopup();
         canvas.renderAll;
 
