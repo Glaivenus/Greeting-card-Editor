@@ -12,11 +12,13 @@ Select background template
 
 
 Developing:
-- [ ] Upload background
+- [x] Upload background
 - [x] Add logos
-- [ ] Upload logos
+- [x] Upload logos
 - [x] Change fonts
-- [x] More fonts
-- [ ] Add photos
-- [ ] Change canvas size
+- [x] More fonts (5+)
+- [x] Add photos
+- [x] Responsive Canvas and elements
+- [x] Adjust stroke
+- [ ] More fonts (10+)
       ...
