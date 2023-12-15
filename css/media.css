@@ -59,5 +59,7 @@
     }
 
 
-    
+    #mainMenuBtn, #changeBackgroundBtn, #modifyBtn, #deleteBtn, #downloadBtn {
+        font-size: 1.8vh;
+    }
 }
