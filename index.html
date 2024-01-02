@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
 
     <script src="./js/index.js"></script>
-    <script src="./js/addlogo.js"></script>
+    <!-- <script src="./js/addlogo.js"></script> -->
     <script src="./js/fontloader.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -206,6 +206,26 @@ document.addEventListener('DOMContentLoaded', function () {
     addtkText();
     addLogoToCanvas();
 });
+
+
+
+function addLogoToCanvas() {
+
+var logoPath = '../img/logo1.png';
+
+fabric.Image.fromURL(logoPath, function (img) {
+    img.set({
+        scaleX: 0.08, 
+        scaleY: 0.08,
+        left: 100, 
+        top: canvas.width / 8,
+    });
+
+    canvas.add(img);
+    canvas.bringToFront(img);
+});
+}
+
 
 
 </script>
