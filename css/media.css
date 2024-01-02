@@ -16,6 +16,7 @@
     }
 
     #addMenu button {
+        height: 5vh;
         margin: 0;
         display: block; 
         box-shadow: 0.1em 0.1em rgba(112, 112, 112, 0.5);
