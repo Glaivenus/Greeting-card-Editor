@@ -9,5 +9,5 @@ This project is a web-based application designed to provide a dynamic and intera
 - **Responsive Design**: Adapt to any screen size, ensuring a seamless experience on all devices.
 - **Interactive Canvas**: Utilize tools like zoom, pan, and object manipulation for detailed editing.
 
-## Getting Started (Chinese)
+## Getting Started
  https://glaivenus.github.io/Greeting-card-Editor/
